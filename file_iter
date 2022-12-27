@@ -1,0 +1,13 @@
+from random import randint
+
+def quote():
+    f = open('./citations.txt', 'r')
+
+    citations_list = []
+
+    for text in f:
+        citations_list.append(text)
+
+    return citations_list[randint(0,len(citations_list))]
+
+print(quote())

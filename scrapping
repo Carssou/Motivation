@@ -1,0 +1,26 @@
+import requests
+from bs4 import BeautifulSoup
+
+site = 'https://www.quotesandthoughts.com/stoic-quotes/'
+file_name = 'citations.txt'
+
+
+open_site = requests.get(site)
+
+parser = BeautifulSoup(open_site.text, 'html.parser')
+
+# attrs is static!! Needs updating each time till I learn more
+result = parser.find_all(attrs={'style':'font-size: 14pt; color: #000000;'})
+
+
+# create if not existing and store in a file
+f = open(file_name, 'w')
+
+for c in result:
+    f.write(c.get_text()+'\n')
+
+f.close()
+
+
+
+
