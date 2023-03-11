@@ -1,0 +1,5 @@
+# To do #
+
+- Find a way to save journal/thoughts entries
+- Get the script to run on its own
+- Add menus for personnalisation
