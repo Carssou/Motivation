@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, messagebox
 from random import randint
 
 def read_quotes(file_path):
@@ -37,7 +37,12 @@ def create_ui(root, quotes):
     root.geometry('800x300')
     root.config(background='#c6c5ef')
     root.title('Motivation')
+    root.resizable(False, False)
+    root.iconbitmap('iconTest-150x150.ico')
     
+    
+
+    """"""
     # Create tabs for quotes and journaling
     tabs = ttk.Notebook(root)
     quotes_tab = ttk.Frame(tabs)
@@ -75,6 +80,28 @@ def create_ui(root, quotes):
     # ADD TEXT WIDGET FOR JOURNALING/THOUGHT INPUT
     journal_entry = tk.Text(journal_tab)
     journal_entry.pack(fill='both', expand=True)
+
+    """
+    Create the top menu for the user interface
+    """
+    top_menu = tk.Menu(root)
+    root.config(menu=top_menu)
+
+    file_menu = tk.Menu(top_menu)
+
+    file_menu.add_separator()
+    file_menu.add_command(label='New quote', command=lambda: update_quote(quote_label, quotes))
+    file_menu.add_command(label='Exit', command=root.destroy)
+
+    sub_menu = tk.Menu(file_menu)
+    sub_menu.add_command(label='Display')
+    file_menu.add_cascade(label='Preferences', menu=sub_menu)
+
+    top_menu.add_cascade(label='File', menu=file_menu)
+
+    help_menu = tk.Menu(top_menu)
+    help_menu.add_command(label='About', command=lambda: messagebox.showinfo('About', 'Motivation Alpha ver 0.01'))
+    top_menu.add_cascade(label='Help', menu=help_menu)
 
 
 def main():
